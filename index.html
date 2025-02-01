@@ -333,44 +333,44 @@
 
     const RegistrationForm = {
         template: `
-                <div class="container-fluid footer">
-                    <div class="row contact" id="block-registration">
-                        <div class="col-md-6 contact-form">
-                            <h3 class="content-ct"><span class="ti-email"></span> Регистрация</h3>
-                            <form @submit.prevent="submitForm" class="form-horizontal" data-toggle="validator" role="form">
-                                <div class="form-group" v-for="(field, index) in fields" :key="index">
-                                    <label :for="field.id" class="col-sm-3 control-label">{{ field.label }}<sup>*</sup></label>
-                                    <div class="col-sm-9">
-                                        <input
-                                            type="text"
-                                            class="form-control"
-                                            :id="field.id"
-                                            v-model="formData[field.id]"
-                                            :placeholder="field.placeholder"
-                                            :required="field.required"
-                                        />
-                                        <div class="help-block with-errors pull-right"></div>
-                                        <span class="form-control-feedback" aria-hidden="true"></span>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-sm-offset-3 col-sm-9">
-                                        <button type="submit" class="btn btn-yellow pull-right" style="color: #ffffff;">
-                                            Отправить
-                                            <span class="ti-arrow-right"></span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="row footer-credit">
-                        <div class="col-md-6 col-sm-6">
-                            <p><a target="_blank" href="https://bingosoft.ru">БИНГО-СОФТ</a> | 2025 </p>
-                        </div>
-                    </div>
+          <div class="container-fluid footer">
+          <div class="row contact" id="block-registration">
+            <div class="col-md-6 contact-form">
+              <h3 class="content-ct"><span class="ti-email"></span> Регистрация</h3>
+              <form @submit.prevent="submitForm" class="form-horizontal" data-toggle="validator" role="form">
+                <div class="form-group" v-for="(field, index) in fields" :key="index">
+                  <label :for="field.id" class="col-sm-3 control-label">{{ field.label }}<sup>*</sup></label>
+                  <div class="col-sm-9">
+                    <input
+                        type="text"
+                        class="form-control"
+                        :id="field.id"
+                        v-model="formData[field.id]"
+                        :placeholder="field.placeholder"
+                        :required="field.required"
+                    />
+                    <div class="help-block with-errors pull-right"></div>
+                    <span class="form-control-feedback" aria-hidden="true"></span>
+                  </div>
                 </div>
-            `,
+                <div class="form-group">
+                  <div class="col-sm-offset-3 col-sm-9">
+                    <button type="submit" class="btn btn-yellow pull-right" style="color: #ffffff;">
+                      Отправить
+                      <span class="ti-arrow-right"></span>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="row footer-credit">
+            <div class="col-md-6 col-sm-6">
+              <p><a target="_blank" href="https://bingosoft.ru">БИНГО-СОФТ</a> | 2025 </p>
+            </div>
+          </div>
+          </div>
+        `,
         data() {
             return {
                 formData: {
@@ -378,7 +378,7 @@
                     surname: '',
                     organization: '',
                     position: '',
-                    telegram_id: '' // Это поле будет заполнено из Telegram
+                    telegram_id: '' // Это поле будет заполнено из URL
                 },
                 fields: [
                     { id: 'name', label: 'Имя', placeholder: 'Имя', required: true },
@@ -390,12 +390,16 @@
             };
         },
         mounted() {
+            // Извлекаем telegram_id из URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const telegramId = urlParams.get('telegram_id');
+            if (telegramId) {
+                this.formData.telegram_id = telegramId; // Заполняем поле telegram_id
+            }
+
+            // Проверка и получение данных из Telegram Web App
             if (window.Telegram && window.Telegram.WebApp) {
-                const telegramData = window.Telegram.WebApp.initData; // Получаем данные из Telegram
-                if (telegramData) {
-                    const telegramInfo = JSON.parse(decodeURIComponent(telegramData));
-                    this.formData.telegram_id = telegramInfo.user.id; // Предполагаем, что ID пользователя передается
-                }
+                // Здесь можно добавить дополнительную логику, если нужно
             } else {
                 console.error('Telegram Web App не инициализирован');
             }
@@ -411,14 +415,12 @@
                         body: JSON.stringify(this.formData)
                     });
 
-                    console.log(JSON.stringify(this.formData))
+                    console.log(JSON.stringify(this.formData));
 
                     if (response.ok) {
                         const result = await response.json();
-                        // Обработка успешного ответа
                         console.log('Форма успешно отправлена', result);
                     } else {
-                        // Обработка ошибки
                         console.error('Ошибка при отправке формы', response.status);
                     }
                 } catch (error) {
