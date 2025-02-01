@@ -399,7 +399,7 @@
                     { id: 'surname', label: 'Фамилия', placeholder: 'Фамилия', required: true },
                     { id: 'organization', label: 'Организация', placeholder: 'Организация', required: true },
                     { id: 'position', label: 'Должность', placeholder: 'Должность', required: true },
-                    { id: 'telegram_id', label: 'telegram_id', placeholder: 'telegram_id', required: true }
+                    { id: 'telegram_id', label: 'telegram_id', placeholder: 'telegram_id', required: false }
                 ],
                 submitted: false,
                 successMessage: false,
@@ -418,11 +418,6 @@
                 // Проверка на заполненность обязательных полей
                 if (!this.formData.name || !this.formData.surname || !this.formData.organization || !this.formData.position) {
                     this.errorMessage = 'Пожалуйста, заполните все обязательные поля';
-                    return;
-                }
-
-                if (this.formData.name && this.formData.surname && this.formData.organization && this.formData.position && !this.formData.telegram_id) {
-                    this.errorMessage = 'telegram_id не заполнен, запустите бот @bingosoft_msk';
                     return;
                 }
 
