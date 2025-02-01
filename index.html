@@ -366,6 +366,9 @@
               <div v-if="successMessage" class="alert alert-success">
                 Форма успешно отправлена!
               </div>
+              <div v-if="errorMessage" class="alert alert-danger">
+                {{ errorMessage }}
+              </div>
             </div>
           </div>
           <div class="row footer-credit">
@@ -389,10 +392,11 @@
                     { id: 'surname', label: 'Фамилия', placeholder: 'Фамилия', required: true },
                     { id: 'organization', label: 'Организация', placeholder: 'Организация', required: true },
                     { id: 'position', label: 'Должность', placeholder: 'Должность', required: true },
-                    { id: 'telegram_id', label: 'telegram_id', placeholder: 'telegram_id', required: false }
+                    { id: 'telegram_id', label: 'telegram_id', placeholder: 'telegram_id', required: true }
                 ],
                 submitted: false,
-                successMessage: false
+                successMessage: false,
+                errorMessage: ''
             };
         },
         mounted() {
@@ -406,7 +410,12 @@
             async submitForm() {
                 // Проверка на заполненность обязательных полей
                 if (!this.formData.name || !this.formData.surname || !this.formData.organization || !this.formData.position) {
-                    alert('Пожалуйста, заполните все обязательные поля.');
+                    this.errorMessage = 'Пожалуйста, заполните все обязательные поля';
+                    return;
+                }
+
+                if (this.formData.name && this.formData.surname && this.formData.organization && this.formData.position && !this.formData.telegram_id) {
+                    this.errorMessage = 'telegram_id не заполнен, запустите бот @bingosoft_msk';
                     return;
                 }
 
@@ -428,6 +437,7 @@
                     if (response.ok) {
                         this.submitted = true;
                         this.successMessage = true;
+                        this.errorMessage = '';
                         const result = await response.json();
                         console.log('Форма успешно отправлена', result);
                     } else {
