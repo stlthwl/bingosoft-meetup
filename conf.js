@@ -52,7 +52,7 @@ const schedule = {
   },
   "day_2": {
     "date": "2025-02-13",
-    "from": "16:00",
+    "from": "13:00",
     "to": "21:00",
     "location": "Большая Косинская улица 45, Яхтклуб",
     "link_to_location": "https://yandex.ru/maps/-/CHejZHmk",

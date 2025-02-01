@@ -42,7 +42,7 @@
             </a>
         </li>
         <li>
-            <a href="#form-registration" class="page-scroll">
+            <a href="#block-registration" class="page-scroll">
                 <span class="menu-title">Регистрация</span>
                 <span class="dot"></span>
             </a>
@@ -53,10 +53,10 @@
     <!-- Start: Header -->
     <div class="row hero-header" id="home">
         <div class="col-md-7">
-            <h1>БИНГО-СОФТ</h1>
-            <h2>msk meetup 2025</h2>
-            <div id="timer"></div>
-            <a href="#form-registration" class="btn btn-lg btn-red page-scroll">Регистрация
+            <h1 class="text-header">БИНГО-СОФТ</h1>
+            <h2 class="text-header">MSK MEETUP 2025</h2>
+            <div class="text-header" id="timer"></div>
+            <a href="#block-registration" class="btn btn-lg btn-red page-scroll" id="reg-btn">Регистрация
                 <span class="ti-arrow-right"></span>
             </a>
         </div>
@@ -74,7 +74,7 @@
             <p>Meetup - формат встречи специалистов, работающих в одной сфере, для обмена мнениями, профессиональным
                 опытом, обсуждения проблем и выработки решений</p>
             <div class="row me-row content-ct speaker">
-                <h4 class="row-title">Что будет</h4>
+                <h2 class="row-title">Что будет</h2>
                 <div class="col-md-4 col-sm-6 feature">
                     <h3>Обмен опытом</h3>
                     <p>Участники делятся знаниями, лайфхаками, методиками работы, примерами
@@ -101,52 +101,77 @@
 
 <div class="container" id="schedule"></div>
 
-<!-- Start: Footer -->
-<div class="container-fluid footer">
-    <div class="row contact">
-        <div class="col-md-6 contact-form">
-            <h3 class="content-ct"><span class="ti-email"></span> Регистрация</h3>
-            <form class="form-horizontal" data-toggle="validator" role="form">
-                <div class="form-group">
-                    <label for="name" class="col-sm-3 control-label">Имя<sup>*</sup></label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" id="name" placeholder="введите имя" required>
-                        <div class="help-block with-errors pull-right"></div>
-                        <span class="form-control-feedback" aria-hidden="true"></span>
-                    </div>
-                </div>
-                <div class="form-group" id="form-registration">
-                    <label for="surname" class="col-sm-3 control-label">Фамилия<sup>*</sup></label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" id="surname" placeholder="введите фамилию" required>
-                        <div class="help-block with-errors pull-right"></div>
-                        <span class="form-control-feedback" aria-hidden="true"></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-3 col-sm-9">
-                        <button type="submit" id="submit" name="submit" class="btn btn-yellow pull-right">
-                            Отправить
-                            <span class="ti-arrow-right"></span>
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="col-md-4 col-md-offset-1 content-ct">
-            <h3>Twitter Feed</h3>
-            <p>Lorem <a href="#">#Ipsum</a> is a dummy text used as a text filler in designs. This is just a dummy text.
-                via <a href="#">@designerdada</a></p>
-            <hr>
-        </div>
-    </div>
-    <div class="row footer-credit">
-        <div class="col-md-6 col-sm-6">
-            <p><a target="_blank" href="https://bingosoft.ru">БИНГО-СОФТ</a> | 2025 </p>
-        </div>
-    </div>
-</div>
-<!-- End: Footer -->
+<div id="reg-form"></div>
+
+<!--&lt;!&ndash; Start: Footer &ndash;&gt;-->
+<!--<div class="container-fluid footer">-->
+<!--    <div class="row contact" id="block-registration">-->
+<!--        <div class="col-md-6 contact-form">-->
+<!--            <h3 class="content-ct"><span class="ti-email"></span> Регистрация</h3>-->
+<!--            <form class="form-horizontal" data-toggle="validator" role="form">-->
+<!--                <div class="form-group">-->
+<!--                    <label for="name" class="col-sm-3 control-label">Имя<sup>*</sup></label>-->
+<!--                    <div class="col-sm-9">-->
+<!--                        <input type="text" class="form-control" id="name" placeholder="Имя" required>-->
+<!--                        <div class="help-block with-errors pull-right"></div>-->
+<!--                        <span class="form-control-feedback" aria-hidden="true"></span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label for="surname" class="col-sm-3 control-label">Фамилия<sup>*</sup></label>-->
+<!--                    <div class="col-sm-9">-->
+<!--                        <input type="text" class="form-control" id="surname" placeholder="Фамилия" required>-->
+<!--                        <div class="help-block with-errors pull-right"></div>-->
+<!--                        <span class="form-control-feedback" aria-hidden="true"></span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label for="organization" class="col-sm-3 control-label">Организация<sup>*</sup></label>-->
+<!--                    <div class="col-sm-9">-->
+<!--                        <input type="text" class="form-control" id="organization" placeholder="Организация" required>-->
+<!--                        <div class="help-block with-errors pull-right"></div>-->
+<!--                        <span class="form-control-feedback" aria-hidden="true"></span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label for="position" class="col-sm-3 control-label">Должность<sup>*</sup></label>-->
+<!--                    <div class="col-sm-9">-->
+<!--                        <input type="text" class="form-control" id="position" placeholder="Должность" required>-->
+<!--                        <div class="help-block with-errors pull-right"></div>-->
+<!--                        <span class="form-control-feedback" aria-hidden="true"></span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label for="telegram_id" class="col-sm-3 control-label">telegram_id</label>-->
+<!--                    <div class="col-sm-9">-->
+<!--                        <input type="text" class="form-control" id="telegram_id" placeholder="telegram_id">-->
+<!--                        <div class="help-block with-errors pull-right"></div>-->
+<!--                        <span class="form-control-feedback" aria-hidden="true"></span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <div class="col-sm-offset-3 col-sm-9">-->
+<!--                        <button type="submit" id="submit" name="submit" class="btn btn-yellow pull-right" style="color: #ffffff;">-->
+<!--                            Отправить-->
+<!--                            <span class="ti-arrow-right"></span>-->
+<!--                        </button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="row footer-credit">-->
+<!--        <div class="col-md-6 col-sm-6">-->
+<!--            <p><a target="_blank" href="https://bingosoft.ru">БИНГО-СОФТ</a> | 2025 </p>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--&lt;!&ndash; End: Footer &ndash;&gt;-->
+
+
+
+
+
 
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
@@ -155,11 +180,12 @@
 <script src="js/validator.js"></script>
 
 <script>
-    const {createApp, ref, onMounted, onUnmounted} = Vue
+    const { createApp, ref, onMounted, onUnmounted } = Vue;
 
     createApp({
         template: `
           <div class="timer-container">
+          <h3 v-if="countdown">До начала мероприятия</h3>
           <h3 v-if="countdown">{{ countdown }}</h3>
           <h3 v-if="eventStatusMessage === 'Событие началось'">Событие началось</h3>
           <h3 v-if="eventStatusMessage === 'Событие завершилось'">Событие завершилось</h3>
@@ -169,16 +195,23 @@
             const countdown = ref('');
             const eventStatusMessage = ref('');
             let intervalId;
+            const regBtnRef = ref(null);
+            const regBlock = ref(null);
 
             const calculateCountdown = () => {
-                const startDate = new Date('2025-02-12T09:30:00').getTime();
+                const startDate = new Date('2025-02-01T09:30:00').getTime();
                 const endDate = new Date('2025-02-13T16:00:00').getTime();
                 const now = new Date().getTime();
 
                 if (now > endDate) {
                     eventStatusMessage.value = 'Событие завершилось';
-                    clearInterval(intervalId)
+                    clearInterval(intervalId);
                     countdown.value = '';
+                    // Скрываем элемент
+                    if (regBtnRef.value && regBlock.value){
+                        regBtnRef.value.style.display = 'none';
+                        regBlock.value.style.display = 'none';
+                    }
                     return;
                 }
 
@@ -188,6 +221,7 @@
                     countdown.value = '';
                     return;
                 }
+
                 const difference = startDate - now;
 
                 if (difference <= 0) {
@@ -196,6 +230,7 @@
                     clearInterval(intervalId);
                     return;
                 }
+
                 const days = Math.floor(difference / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
@@ -204,20 +239,24 @@
                 countdown.value = `${days} дн. ${hours} ч. ${minutes} мин. ${seconds} сек.`;
             };
 
-
             onMounted(() => {
                 calculateCountdown();
                 intervalId = setInterval(calculateCountdown, 1000);
+                regBtnRef.value = document.getElementById('reg-btn');
+                regBlock.value = document.getElementById('block-registration');
             });
 
             onUnmounted(() => {
                 clearInterval(intervalId);
             });
 
-            return {countdown, eventStatusMessage};
+            return {countdown, eventStatusMessage, regBtnRef};
         },
         style: `
-    `,
+        .timer-container{
+          text-align: center;
+        }
+      `,
     }).mount("#timer");
 </script>
 
@@ -235,8 +274,7 @@
                 role="presentation"
                 :class="{active: activeTab === key}">
               <a href="#" @click.prevent="activeTab = key">
-                {{ formatDate(day.date, 'day') }}<sup>st</sup> day
-                <small class="hidden-xs">({{ formatDate(day.date, 'full') }})</small>
+                {{ formatDate(day.date, 'full') }}
               </a>
             </li>
           </ul>
@@ -247,19 +285,21 @@
                  class="tab-pane"
                  :class="{ 'fade' : activeTab !== key, 'in' : activeTab === key, 'active': activeTab === key}"
             >
-              <p>Место проведения: <a :href="day.link_to_location" target="_blank"> {{ day.location }} </a></p>
+              <h3>Место проведения: <a :href="day.link_to_location" target="_blank"> {{ day.location }} </a></h3>
               <div class="row" >
                 <div class="col-md-6">
                   <div v-for="(event, index) in day.schedule"
                        :key="index"
                        class="media">
                     <div class="media-body">
-                      <h4 class="media-heading">{{ event.from }} - {{ event.to }}</h4>
-                      <h5>{{ event.description }}</h5>
+                      <h3 class="media-heading">{{ event.from }} - {{ event.to }}</h3>
+                      <h4>{{ event.description }}</h4>
                       <div v-if="event.speakers.length > 0">
-                        <h5>Спикеры: {{ event.speakers.toString() }}</h5>
+                        <h4>Спикеры:</h4>
+                        <h5 v-for="name in event.speakers">{{ name }}</h5>
                       </div>
                     </div>
+                    <hr>
                   </div>
                 </div>
               </div>
@@ -272,8 +312,8 @@
 
             const formatDate = (value, type) => {
                 const date = new Date(value);
-                const day = date.getDate();
-                const month = date.toLocaleString('ru', { month: 'long' });
+                const day = String(date.getDate()).padStart(2, '0'); // Добавляем ведущий ноль
+                const month = String(date.getMonth() + 1).padStart(2, '0'); // Добавляем ведущий ноль и корректируем месяц
                 const year = date.getFullYear();
 
                 if (type === 'day') {
@@ -286,6 +326,111 @@
         },
     }).mount("#schedule");
 </script>
+
+
+<script type="module">
+    const { createApp } = Vue;
+
+    const RegistrationForm = {
+        template: `
+                <div class="container-fluid footer">
+                    <div class="row contact" id="block-registration">
+                        <div class="col-md-6 contact-form">
+                            <h3 class="content-ct"><span class="ti-email"></span> Регистрация</h3>
+                            <form @submit.prevent="submitForm" class="form-horizontal" data-toggle="validator" role="form">
+                                <div class="form-group" v-for="(field, index) in fields" :key="index">
+                                    <label :for="field.id" class="col-sm-3 control-label">{{ field.label }}<sup>*</sup></label>
+                                    <div class="col-sm-9">
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            :id="field.id"
+                                            v-model="formData[field.id]"
+                                            :placeholder="field.placeholder"
+                                            :required="field.required"
+                                        />
+                                        <div class="help-block with-errors pull-right"></div>
+                                        <span class="form-control-feedback" aria-hidden="true"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-3 col-sm-9">
+                                        <button type="submit" class="btn btn-yellow pull-right" style="color: #ffffff;">
+                                            Отправить
+                                            <span class="ti-arrow-right"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row footer-credit">
+                        <div class="col-md-6 col-sm-6">
+                            <p><a target="_blank" href="https://bingosoft.ru">БИНГО-СОФТ</a> | 2025 </p>
+                        </div>
+                    </div>
+                </div>
+            `,
+        data() {
+            return {
+                formData: {
+                    name: '',
+                    surname: '',
+                    organization: '',
+                    position: '',
+                    telegram_id: '' // Это поле будет заполнено из Telegram
+                },
+                fields: [
+                    { id: 'name', label: 'Имя', placeholder: 'Имя', required: true },
+                    { id: 'surname', label: 'Фамилия', placeholder: 'Фамилия', required: true },
+                    { id: 'organization', label: 'Организация', placeholder: 'Организация', required: true },
+                    { id: 'position', label: 'Должность', placeholder: 'Должность', required: true },
+                    { id: 'telegram_id', label: 'telegram_id', placeholder: 'telegram_id', required: false }
+                ]
+            };
+        },
+        mounted() {
+            if (window.Telegram && window.Telegram.WebApp) {
+                const telegramData = window.Telegram.WebApp.initData; // Получаем данные из Telegram
+                if (telegramData) {
+                    const telegramInfo = JSON.parse(decodeURIComponent(telegramData));
+                    this.formData.telegram_id = telegramInfo.user.id; // Предполагаем, что ID пользователя передается
+                }
+            } else {
+                console.error('Telegram Web App не инициализирован');
+            }
+        },
+        methods: {
+            async submitForm() {
+                try {
+                    const response = await fetch('http://localhost:8000/registration', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(this.formData)
+                    });
+
+                    console.log(JSON.stringify(this.formData))
+
+                    if (response.ok) {
+                        const result = await response.json();
+                        // Обработка успешного ответа
+                        console.log('Форма успешно отправлена', result);
+                    } else {
+                        // Обработка ошибки
+                        console.error('Ошибка при отправке формы', response.status);
+                    }
+                } catch (error) {
+                    console.error('Ошибка:', error);
+                }
+            }
+        }
+    };
+
+    createApp(RegistrationForm).mount('#reg-form');
+</script>
+
 
 </body>
 </html>

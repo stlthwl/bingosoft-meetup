@@ -7,6 +7,12 @@ body {
 h1, h2, h3, h4, h5, h6 {
 	font-weight: 200;
 }
+
+.text-header {
+    font-weight: 600;
+    font-family: sans-serif;
+}
+
 ul {
 	margin: 0;
 	padding: 0;
@@ -29,7 +35,7 @@ a:hover, a:focus, a:active, a:visited {
 .btn-lg {
 	padding: 15px 40px;
     font-size: 16px;
-    line-height: none;
+    /*line-height: none;*/
     border-radius: 4px;
 }
 .btn-red {
@@ -47,10 +53,12 @@ a:hover, a:focus, a:active, a:visited {
 .btn-yellow.disabled:hover,
 .btn-yellow[disabled]:hover {
     opacity: 0.65;
+    color: #fff;
 }
 .content-ct {
 	text-align: center;
 }
+
 
 /* ------------------
 	Navigation 
