@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="bingosoft-office meetup 2025">
+    <meta name="author" content="stlthwl">
+    <title>bingosoft-office msk meetup</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/themify-icons.css" rel="stylesheet">
+    <link href='css/dosis-font.css' rel='stylesheet' type='text/css'>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body id="page-top" data-spy="scroll" data-target=".side-menu">
+
+<nav class="side-menu">
+    <ul>
+        <li class="hidden active">
+            <a class="page-scroll" href="#page-top"></a>
+        </li>
+        <li>
+            <a href="#home" class="page-scroll">
+                <span class="menu-title">Главная</span>
+                <span class="dot"></span>
+            </a>
+        </li>
+        <li>
+            <a href="#About_meetup" class="page-scroll">
+                <span class="menu-title">О мероприятии</span>
+                <span class="dot"></span>
+            </a>
+        </li>
+        <li>
+            <a href="#schedule" class="page-scroll">
+                <span class="menu-title">Программа</span>
+                <span class="dot"></span>
+            </a>
+        </li>
+        <li>
+            <a href="#form-registration" class="page-scroll">
+                <span class="menu-title">Регистрация</span>
+                <span class="dot"></span>
+            </a>
+        </li>
+    </ul>
+</nav>
+<div class="container-fluid">
+    <!-- Start: Header -->
+    <div class="row hero-header" id="home">
+        <div class="col-md-7">
+            <h1>БИНГО-СОФТ</h1>
+            <h2>msk meetup 2025</h2>
+            <div id="timer"></div>
+            <a href="#form-registration" class="btn btn-lg btn-red page-scroll">Регистрация
+                <span class="ti-arrow-right"></span>
+            </a>
+        </div>
+        <div class="col-md-5 hidden-xs">
+            <img src="img/bingo-logo3.png" class="rocket animated bounce">
+        </div>
+    </div>
+    <!-- End: Header -->
+
+
+    <!-- Start: About meetup -->
+    <div class="container">
+        <div class="row me-row content-ct speaker" id="About_meetup">
+            <h2>О мероприятии</h2>
+            <p>Meetup - формат встречи специалистов, работающих в одной сфере, для обмена мнениями, профессиональным
+                опытом, обсуждения проблем и выработки решений</p>
+            <div class="row me-row content-ct speaker">
+                <h4 class="row-title">Что будет</h4>
+                <div class="col-md-4 col-sm-6 feature">
+                    <h3>Обмен опытом</h3>
+                    <p>Участники делятся знаниями, лайфхаками, методиками работы, примерами
+                        успешной реализации проектов или, напротив, трудностями, с которыми пришлось
+                        столкнуться.</p>
+                </div>
+                <div class="col-md-4 col-sm-6 feature">
+                    <h3>Сплачивание команды</h3>
+                    <p>Митапы часто проводят внутри одной организации для того, чтобы наладить отношения в команде,
+                        помочь новым сотрудникам в адаптации и, как следствие, увеличить эффективность.</p>
+                </div>
+                <div class="col-md-4 col-sm-6 feature">
+                    <h3>Укрепление личного бренда</h3>
+                    <p>Выступления на митапе — возможность для специалиста продемонстрировать профессионализм и
+                        уникальный опыт, приобретенный в процессе работы.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End: About meetup -->
+</div>
+
+
+
+<div class="container" id="schedule"></div>
+
+<!-- Start: Footer -->
+<div class="container-fluid footer">
+    <div class="row contact">
+        <div class="col-md-6 contact-form">
+            <h3 class="content-ct"><span class="ti-email"></span> Регистрация</h3>
+            <form class="form-horizontal" data-toggle="validator" role="form">
+                <div class="form-group">
+                    <label for="name" class="col-sm-3 control-label">Имя<sup>*</sup></label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="name" placeholder="введите имя" required>
+                        <div class="help-block with-errors pull-right"></div>
+                        <span class="form-control-feedback" aria-hidden="true"></span>
+                    </div>
+                </div>
+                <div class="form-group" id="form-registration">
+                    <label for="surname" class="col-sm-3 control-label">Фамилия<sup>*</sup></label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="surname" placeholder="введите фамилию" required>
+                        <div class="help-block with-errors pull-right"></div>
+                        <span class="form-control-feedback" aria-hidden="true"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <button type="submit" id="submit" name="submit" class="btn btn-yellow pull-right">
+                            Отправить
+                            <span class="ti-arrow-right"></span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4 col-md-offset-1 content-ct">
+            <h3>Twitter Feed</h3>
+            <p>Lorem <a href="#">#Ipsum</a> is a dummy text used as a text filler in designs. This is just a dummy text.
+                via <a href="#">@designerdada</a></p>
+            <hr>
+        </div>
+    </div>
+    <div class="row footer-credit">
+        <div class="col-md-6 col-sm-6">
+            <p><a target="_blank" href="https://bingosoft.ru">БИНГО-СОФТ</a> | 2025 </p>
+        </div>
+    </div>
+</div>
+<!-- End: Footer -->
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.easing.min.js"></script>
+<script src="js/scrolling-nav.js"></script>
+<script src="js/validator.js"></script>
+
+<script>
+    const {createApp, ref, onMounted, onUnmounted} = Vue
+
+    createApp({
+        template: `
+          <div class="timer-container">
+          <h3 v-if="countdown">{{ countdown }}</h3>
+          <h3 v-if="eventStatusMessage === 'Событие началось'">Событие началось</h3>
+          <h3 v-if="eventStatusMessage === 'Событие завершилось'">Событие завершилось</h3>
+          </div>
+        `,
+        setup() {
+            const countdown = ref('');
+            const eventStatusMessage = ref('');
+            let intervalId;
+
+            const calculateCountdown = () => {
+                const startDate = new Date('2025-02-12T09:30:00').getTime();
+                const endDate = new Date('2025-02-13T16:00:00').getTime();
+                const now = new Date().getTime();
+
+                if (now > endDate) {
+                    eventStatusMessage.value = 'Событие завершилось';
+                    clearInterval(intervalId)
+                    countdown.value = '';
+                    return;
+                }
+
+                if (now >= startDate && now <= endDate) {
+                    eventStatusMessage.value = 'Событие началось';
+                    clearInterval(intervalId);
+                    countdown.value = '';
+                    return;
+                }
+                const difference = startDate - now;
+
+                if (difference <= 0) {
+                    countdown.value = '';
+                    eventStatusMessage.value = 'Событие началось';
+                    clearInterval(intervalId);
+                    return;
+                }
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                countdown.value = `${days} дн. ${hours} ч. ${minutes} мин. ${seconds} сек.`;
+            };
+
+
+            onMounted(() => {
+                calculateCountdown();
+                intervalId = setInterval(calculateCountdown, 1000);
+            });
+
+            onUnmounted(() => {
+                clearInterval(intervalId);
+            });
+
+            return {countdown, eventStatusMessage};
+        },
+        style: `
+    `,
+    }).mount("#timer");
+</script>
+
+<script type="module">
+    import schedule from './conf.js';
+    const { createApp, ref, computed } = Vue;
+
+    createApp({
+        template: `
+          <div class="schedule-container">
+          <h2 class="row-title content-ct">Программа</h2>
+          <ul class="nav nav-tabs">
+            <li v-for="(day, key) in schedule"
+                :key="key"
+                role="presentation"
+                :class="{active: activeTab === key}">
+              <a href="#" @click.prevent="activeTab = key">
+                {{ formatDate(day.date, 'day') }}<sup>st</sup> day
+                <small class="hidden-xs">({{ formatDate(day.date, 'full') }})</small>
+              </a>
+            </li>
+          </ul>
+          <div class="tab-content">
+
+            <div v-for="(day, key) in schedule"
+                 :key="key"
+                 class="tab-pane"
+                 :class="{ 'fade' : activeTab !== key, 'in' : activeTab === key, 'active': activeTab === key}"
+            >
+              <p>Место проведения: <a :href="day.link_to_location" target="_blank"> {{ day.location }} </a></p>
+              <div class="row" >
+                <div class="col-md-6">
+                  <div v-for="(event, index) in day.schedule"
+                       :key="index"
+                       class="media">
+                    <div class="media-body">
+                      <h4 class="media-heading">{{ event.from }} - {{ event.to }}</h4>
+                      <h5>{{ event.description }}</h5>
+                      <div v-if="event.speakers.length > 0">
+                        <h5>Спикеры: {{ event.speakers.toString() }}</h5>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+        `,
+        setup(){
+            const activeTab = ref('day_1');
+
+            const formatDate = (value, type) => {
+                const date = new Date(value);
+                const day = date.getDate();
+                const month = date.toLocaleString('ru', { month: 'long' });
+                const year = date.getFullYear();
+
+                if (type === 'day') {
+                    return day;
+                } else if (type === 'full') {
+                    return `${day}.${month}.${year}`;
+                }
+            };
+            return { schedule, activeTab, formatDate };
+        },
+    }).mount("#schedule");
+</script>
+
+</body>
+</html>
