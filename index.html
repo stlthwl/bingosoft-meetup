@@ -359,9 +359,7 @@
                     <button
                         v-if="!submitted"
                         type="button"
-                        @click="submitForm"
-                        @touchstart="submitForm"
-                        @touchhend="submitForm"
+                        @click="handleButtonClick"
                         class="btn btn-yellow pull-right"
                         style="position: absolute; color: #ffffff;">
                       Отправить
@@ -414,6 +412,10 @@
             }
         },
         methods: {
+            handleButtonClick() {
+                // Вызываем submitForm при нажатии на кнопку
+                this.submitForm();
+            },
             async submitForm() {
                 // Проверка на заполненность обязательных полей
                 if (!this.formData.name || !this.formData.surname || !this.formData.organization || !this.formData.position) {
@@ -444,9 +446,11 @@
                         console.log('Форма успешно отправлена', result);
                     } else {
                         const errorData = await response.json();
+                        this.errorMessage = 'Ошибка при отправке формы: ' + (errorData.message || 'Неизвестная ошибка');
                         console.error('Ошибка при отправке формы', response.status, errorData);
                     }
                 } catch (error) {
+                    this.errorMessage = 'Ошибка: ' + error.message;
                     console.error('Ошибка:', error);
                 }
             }
