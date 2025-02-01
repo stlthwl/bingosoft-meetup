@@ -199,7 +199,7 @@
             const regBlock = ref(null);
 
             const calculateCountdown = () => {
-                const startDate = new Date('2025-02-01T09:30:00').getTime();
+                const startDate = new Date('2025-02-12T09:30:00').getTime();
                 const endDate = new Date('2025-02-13T16:00:00').getTime();
                 const now = new Date().getTime();
 
@@ -369,10 +369,10 @@
                 </div>
               </form>
               <div v-if="successMessage" class="alert alert-success">
-                Форма успешно отправлена!
+                {{ successMessageText }}
               </div>
               <div v-if="errorMessage" class="alert alert-danger" style="margin-top: 70px;">
-                {{ errorMessage }}
+                {{ errorMessageText }}
               </div>
             </div>
           </div>
@@ -401,7 +401,9 @@
                 ],
                 submitted: false,
                 successMessage: false,
-                errorMessage: ''
+                successMessageText: '',
+                errorMessage: false,
+                errorMessageText: ''
             };
         },
         mounted() {
@@ -419,39 +421,40 @@
             async submitForm() {
                 // Проверка на заполненность обязательных полей
                 if (!this.formData.name || !this.formData.surname || !this.formData.organization || !this.formData.position) {
-                    this.errorMessage = 'Пожалуйста, заполните все обязательные поля';
+                    this.errorMessage = true
+                    this.errorMessageText = 'Пожалуйста, заполните все обязательные поля';
                     return;
                 }
 
-                try {
-                    const response = await fetch('http://localhost:8000/registration', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            name: this.formData.name,
-                            surname: this.formData.surname,
-                            organization: this.formData.organization,
-                            position: this.formData.position,
-                            telegram_id: parseInt(this.formData.telegram_id)
-                        })
-                    });
 
-                    if (response.ok) {
+                const response = await fetch('http://localhost:8864/registration', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: this.formData.name,
+                        surname: this.formData.surname,
+                        organization: this.formData.organization,
+                        position: this.formData.position,
+                        telegram_id: this.formData.telegram_id === '' ? 0 :  parseInt(this.formData.telegram_id)
+                    })
+                });
+
+                try{
+                    const data = await response.json(); // Получаем json данные
+                    if (data.status === 200) {
                         this.submitted = true;
                         this.successMessage = true;
-                        this.errorMessage = '';
-                        const result = await response.json();
-                        console.log('Форма успешно отправлена', result);
-                    } else {
-                        const errorData = await response.json();
-                        this.errorMessage = 'Ошибка при отправке формы: ' + (errorData.message || 'Неизвестная ошибка');
-                        console.error('Ошибка при отправке формы', response.status, errorData);
+                        this.successMessageText = data.message
                     }
-                } catch (error) {
-                    this.errorMessage = 'Ошибка: ' + error.message;
-                    console.error('Ошибка:', error);
+
+                    this.errorMessage = true;
+                    this.errorMessageText = data.message
+
+                } catch (e){
+                    this.errorMessage = true
+                    this.errorMessageText = 'Ошибка: ' . e.message ? e.message : 'internal server error'
                 }
             }
         }
