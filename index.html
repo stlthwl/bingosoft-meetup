@@ -349,31 +349,31 @@
                         :placeholder="field.placeholder"
                         :required="field.required"
                         :readonly="field.id === 'telegram_id'"
-        />
-        <div class="help-block with-errors pull-right"></div>
-        <span class="form-control-feedback" aria-hidden="true"></span>
-        </div>
-        </div>
-        <div class="form-group">
-        <div class="col-sm-offset-3 col-sm-9">
-        <button v-if="!submitted" type="submit" class="btn btn-yellow pull-right" style="color: #ffffff;">
-        Отправить
-        <span class="ti-arrow-right"></span>
-        </button>
-        </div>
-        </div>
-        </form>
-        <div v-if="successMessage" class="alert alert-success">
-        Форма успешно отправлена!
-        </div>
-        </div>
-        </div>
-        <div class="row footer-credit">
-        <div class="col-md-6 col-sm-6">
-        <p><a target="_blank" href="https://bingosoft.ru">БИНГО-СОФТ</a> | 2025 </p>
-        </div>
-        </div>
-        </div>
+                    />
+                    <div class="help-block with-errors pull-right"></div>
+                    <span class="form-control-feedback" aria-hidden="true"></span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-offset-3 col-sm-9">
+                    <button v-if="!submitted" type="submit" class="btn btn-yellow pull-right" style="color: #ffffff;">
+                      Отправить
+                      <span class="ti-arrow-right"></span>
+                    </button>
+                  </div>
+                </div>
+              </form>
+              <div v-if="successMessage" class="alert alert-success">
+                Форма успешно отправлена!
+              </div>
+            </div>
+          </div>
+          <div class="row footer-credit">
+            <div class="col-md-6 col-sm-6">
+              <p><a target="_blank" href="https://bingosoft.ru">БИНГО-СОФТ</a> | 2025 </p>
+            </div>
+          </div>
+          </div>
         `,
         data() {
             return {
@@ -404,6 +404,12 @@
         },
         methods: {
             async submitForm() {
+                // Проверка на заполненность обязательных полей
+                if (!this.formData.name || !this.formData.surname || !this.formData.organization || !this.formData.position) {
+                    alert('Пожалуйста, заполните все обязательные поля.');
+                    return;
+                }
+
                 try {
                     const response = await fetch('http://localhost:8000/registration', {
                         method: 'POST',
