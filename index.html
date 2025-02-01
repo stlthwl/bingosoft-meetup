@@ -412,16 +412,21 @@
                         headers: {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify(this.formData)
+                        body: JSON.stringify({
+                            name: this.formData.name,
+                            surname: this.formData.surname,
+                            organization: this.formData.organization,
+                            position: this.formData.position,
+                            telegram_id: parseInt(this.formData.telegram_id)
+                        })
                     });
-
-                    console.log(JSON.stringify(this.formData));
 
                     if (response.ok) {
                         const result = await response.json();
                         console.log('Форма успешно отправлена', result);
                     } else {
-                        console.error('Ошибка при отправке формы', response.status);
+                        const errorData = await response.json();
+                        console.error('Ошибка при отправке формы', response.status, errorData);
                     }
                 } catch (error) {
                     console.error('Ошибка:', error);
