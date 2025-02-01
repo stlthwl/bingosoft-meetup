@@ -388,18 +388,18 @@
         data() {
             return {
                 formData: {
+                    telegram_id: '',
                     name: '',
                     surname: '',
                     organization: '',
                     position: '',
-                    telegram_id: ''
                 },
                 fields: [
+                    { id: 'telegram_id', label: 'telegram_id', placeholder: 'telegram_id', required: false },
                     { id: 'name', label: 'Имя', placeholder: 'Имя', required: true },
                     { id: 'surname', label: 'Фамилия', placeholder: 'Фамилия', required: true },
                     { id: 'organization', label: 'Организация', placeholder: 'Организация', required: true },
                     { id: 'position', label: 'Должность', placeholder: 'Должность', required: true },
-                    { id: 'telegram_id', label: 'telegram_id', placeholder: 'telegram_id', required: false }
                 ],
                 submitted: false,
                 successMessage: false,
