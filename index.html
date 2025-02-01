@@ -348,28 +348,32 @@
                         v-model="formData[field.id]"
                         :placeholder="field.placeholder"
                         :required="field.required"
-                    />
-                    <div class="help-block with-errors pull-right"></div>
-                    <span class="form-control-feedback" aria-hidden="true"></span>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-sm-offset-3 col-sm-9">
-                    <button type="submit" class="btn btn-yellow pull-right" style="color: #ffffff;">
-                      Отправить
-                      <span class="ti-arrow-right"></span>
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-          <div class="row footer-credit">
-            <div class="col-md-6 col-sm-6">
-              <p><a target="_blank" href="https://bingosoft.ru">БИНГО-СОФТ</a> | 2025 </p>
-            </div>
-          </div>
-          </div>
+                        :readonly="field.id === 'telegram_id'"
+        />
+        <div class="help-block with-errors pull-right"></div>
+        <span class="form-control-feedback" aria-hidden="true"></span>
+        </div>
+        </div>
+        <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+        <button v-if="!submitted" type="submit" class="btn btn-yellow pull-right" style="color: #ffffff;">
+        Отправить
+        <span class="ti-arrow-right"></span>
+        </button>
+        </div>
+        </div>
+        </form>
+        <div v-if="successMessage" class="alert alert-success">
+        Форма успешно отправлена!
+        </div>
+        </div>
+        </div>
+        <div class="row footer-credit">
+        <div class="col-md-6 col-sm-6">
+        <p><a target="_blank" href="https://bingosoft.ru">БИНГО-СОФТ</a> | 2025 </p>
+        </div>
+        </div>
+        </div>
         `,
         data() {
             return {
@@ -378,7 +382,7 @@
                     surname: '',
                     organization: '',
                     position: '',
-                    telegram_id: '' // Это поле будет заполнено из URL
+                    telegram_id: ''
                 },
                 fields: [
                     { id: 'name', label: 'Имя', placeholder: 'Имя', required: true },
@@ -386,22 +390,16 @@
                     { id: 'organization', label: 'Организация', placeholder: 'Организация', required: true },
                     { id: 'position', label: 'Должность', placeholder: 'Должность', required: true },
                     { id: 'telegram_id', label: 'telegram_id', placeholder: 'telegram_id', required: false }
-                ]
+                ],
+                submitted: false,
+                successMessage: false
             };
         },
         mounted() {
-            // Извлекаем telegram_id из URL
             const urlParams = new URLSearchParams(window.location.search);
             const telegramId = urlParams.get('telegram_id');
             if (telegramId) {
-                this.formData.telegram_id = telegramId; // Заполняем поле telegram_id
-            }
-
-            // Проверка и получение данных из Telegram Web App
-            if (window.Telegram && window.Telegram.WebApp) {
-                // Здесь можно добавить дополнительную логику, если нужно
-            } else {
-                console.error('Telegram Web App не инициализирован');
+                this.formData.telegram_id = telegramId;
             }
         },
         methods: {
@@ -422,6 +420,8 @@
                     });
 
                     if (response.ok) {
+                        this.submitted = true;
+                        this.successMessage = true;
                         const result = await response.json();
                         console.log('Форма успешно отправлена', result);
                     } else {
