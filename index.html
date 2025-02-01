@@ -4,7 +4,7 @@
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="bingosoft-office meetup 2025">
     <meta name="author" content="stlthwl">
     <title>bingosoft-office msk meetup</title>
@@ -356,7 +356,7 @@
                 </div>
                 <div class="form-group">
                   <div class="col-sm-offset-3 col-sm-9">
-                    <button v-if="!submitted" type="submit" class="btn btn-yellow pull-right" style="color: #ffffff;">
+                    <button v-if="!submitted" type="button" @click="submitForm" class="btn btn-yellow pull-right" style="color: #ffffff;">
                       Отправить
                       <span class="ti-arrow-right"></span>
                     </button>
