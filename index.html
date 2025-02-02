@@ -368,10 +368,10 @@
                   </div>
                 </div>
               </form>
-              <div v-if="submitted" class="alert alert-success" style="margin-top: 70px;">
+              <div v-if="submitted && !error" class="alert alert-success" style="margin-top: 70px;">
                 {{ message }}
               </div>
-              <div v-if="!submitted && message!== ''" class="alert alert-danger" style="margin-top: 70px;">
+              <div v-if="!submitted && error" class="alert alert-danger" style="margin-top: 70px;">
                 {{ message }}
               </div>
             </div>
@@ -400,6 +400,7 @@
                     { id: 'position', label: 'Должность', placeholder: 'Должность', required: true },
                 ],
                 submitted: false,
+                error: false,
                 message: '',
             };
         },
@@ -420,6 +421,7 @@
                 // Проверка на заполненность обязательных полей
                 if (!this.formData.name || !this.formData.surname || !this.formData.organization || !this.formData.position) {
                     this.submitted = false
+                    this.error = true
                     this.message = 'Пожалуйста, заполните все обязательные поля';
                     return;
                 }
@@ -443,14 +445,17 @@
                     const data = await response.json(); // Получаем json данные
                     if (data.status === 200) {
                         this.submitted = true;
+                        this.error = false
                         this.message = data.message
                     } else {
-                        this.submitted = true;
+                        this.submitted = false;
+                        this.error = true
                         this.message = data.message
                     }
 
                 } catch (e){
                     this.submitted = false
+                    this.error = true
                     this.message = 'Ошибка: ' . e.message ? e.message : 'internal server error'
                 }
             }
