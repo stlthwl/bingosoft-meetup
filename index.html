@@ -426,22 +426,21 @@
                     return;
                 }
 
-
-                const response = await fetch('http://95.163.222.56:8864/registration', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        name: this.formData.name,
-                        surname: this.formData.surname,
-                        organization: this.formData.organization,
-                        position: this.formData.position,
-                        telegram_id: this.formData.telegram_id === '' ? 0 :  parseInt(this.formData.telegram_id)
-                    })
-                });
-
                 try{
+                    const response = await fetch('http://95.163.222.56:8864/registration', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            name: this.formData.name,
+                            surname: this.formData.surname,
+                            organization: this.formData.organization,
+                            position: this.formData.position,
+                            telegram_id: this.formData.telegram_id === '' ? 0 :  parseInt(this.formData.telegram_id)
+                        })
+                    });
+
                     const data = await response.json(); // Получаем json данные
                     if (data.status === 200) {
                         this.submitted = true;
