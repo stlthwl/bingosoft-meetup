@@ -368,11 +368,11 @@
                   </div>
                 </div>
               </form>
-              <div v-if="successMessage" class="alert alert-success" style="margin-top: 70px;">
-                {{ successMessageText }}
+              <div v-if="submitted" class="alert alert-success" style="margin-top: 70px;">
+                {{ message }}
               </div>
-              <div v-if="errorMessage" class="alert alert-danger" style="margin-top: 70px;">
-                {{ errorMessageText }}
+              <div v-if="!submitted && message !== ''" class="alert alert-danger" style="margin-top: 70px;">
+                {{ message }}
               </div>
             </div>
           </div>
@@ -400,10 +400,7 @@
                     { id: 'position', label: 'Должность', placeholder: 'Должность', required: true },
                 ],
                 submitted: false,
-                successMessage: false,
-                successMessageText: '',
-                errorMessage: false,
-                errorMessageText: ''
+                message: '',
             };
         },
         mounted() {
@@ -419,10 +416,11 @@
                 this.submitForm();
             },
             async submitForm() {
+
                 // Проверка на заполненность обязательных полей
                 if (!this.formData.name || !this.formData.surname || !this.formData.organization || !this.formData.position) {
-                    this.errorMessage = true
-                    this.errorMessageText = 'Пожалуйста, заполните все обязательные поля';
+                    this.submitted = false
+                    this.message = 'Пожалуйста, заполните все обязательные поля';
                     return;
                 }
 
@@ -445,17 +443,15 @@
                     const data = await response.json(); // Получаем json данные
                     if (data.status === 200) {
                         this.submitted = true;
-                        this.successMessage = true;
-                        this.successMessageText = data.message
-                        return
+                        this.message = data.message
+                    } else {
+                        this.submitted = true;
+                        this.message = data.message
                     }
 
-                    this.errorMessage = true;
-                    this.errorMessageText = data.message
-
                 } catch (e){
-                    this.errorMessage = true
-                    this.errorMessageText = 'Ошибка: ' . e.message ? e.message : 'internal server error'
+                    this.submitted = false
+                    this.message = 'Ошибка: ' . e.message ? e.message : 'internal server error'
                 }
             }
         }
