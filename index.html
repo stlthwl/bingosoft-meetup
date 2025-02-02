@@ -368,10 +368,7 @@
                   </div>
                 </div>
               </form>
-              <div v-if="submitted" class="alert alert-success" style="margin-top: 70px;">
-                {{ message }}
-              </div>
-              <div v-if="!submitted && message !== ''" class="alert alert-danger" style="margin-top: 70px;">
+              <div v-if="submitted" class="alert" style="margin-top: 70px;">
                 {{ message }}
               </div>
             </div>
