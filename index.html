@@ -346,50 +346,48 @@
         },
         methods: {
             handleButtonClick() {
-                // Вызываем submitForm при нажатии на кнопку
-                this.submitForm();
+                this.submitForm(); // Вызов метода отправки формы
             },
             async submitForm() {
-
                 // Проверка на заполненность обязательных полей
                 if (!this.formData.name || !this.formData.surname || !this.formData.organization || !this.formData.position) {
-                    this.submitted = false
-                    this.error = true
+                    this.submitted = false;
+                    this.error = true;
                     this.message = 'Пожалуйста, заполните все обязательные поля';
                     return;
                 }
 
-                try{
-                    document.addEventListener('DOMContentLoaded', () => {
-                        if (window.Telegram && window.Telegram.WebApp) {
-                            console.log('Telegram Web App is available!');
-                            console.log(window.Telegram.WebApp)
+                try {
+                    // Проверка доступности Telegram Web App
+                    if (window.Telegram && window.Telegram.WebApp) {
+                        console.log('Telegram Web App is available!');
+                        console.log(window.Telegram.WebApp);
 
-                            let data = JSON.stringify({
-                                name: this.formData.name,
-                                surname: this.formData.surname,
-                                organization: this.formData.organization,
-                                position: this.formData.position,
-                                telegram_id: this.formData.telegram_id === '' ? 0 :  parseInt(this.formData.telegram_id)
-                            })
+                        let data = JSON.stringify({
+                            name: this.formData.name,
+                            surname: this.formData.surname,
+                            organization: this.formData.organization,
+                            position: this.formData.position,
+                            telegram_id: this.formData.telegram_id === '' ? 0 : parseInt(this.formData.telegram_id)
+                        });
 
-                            window.Telegram.WebApp.sendData(JSON.stringify(data));
+                        // Отправка данных в Telegram Web App
+                        window.Telegram.WebApp.sendData(data);
 
-                            this.submitted = true
-                            this.error = false
-                            this.message = 'Данные успешно отправлены'
-                        } else {
-                            console.error('Telegram Web App is NOT available.');
-                            console.log('URL', window.location.href); // выведет текущий URL, для отладки
-                            this.message = 'Не удалось получить инициализировать Telegram Web App. Запустите бот @bingosoft_msk'
-                            this.error = true
-                            this.submitted = false
-                        }
-                    });
-                } catch (e){
-                    this.submitted = false
-                    this.error = true
-                    this.message = 'Ошибка: internal server error'
+                        this.submitted = true;
+                        this.error = false;
+                        this.message = 'Данные успешно отправлены';
+                    } else {
+                        console.error('Telegram Web App is NOT available.');
+                        console.log('URL', window.location.href); // вывод текущего URL для отладки
+                        this.message = 'Не удалось инициализировать Telegram Web App. Запустите бот @bingosoft_msk';
+                        this.error = true;
+                        this.submitted = false;
+                    }
+                } catch (e) {
+                    this.submitted = false;
+                    this.error = true;
+                    this.message = 'Ошибка: внутренний серверный сбой';
                 }
             }
         }
