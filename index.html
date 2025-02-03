@@ -366,6 +366,10 @@
                         telegram_id: this.formData.telegram_id === '' ? 0 :  parseInt(this.formData.telegram_id)
                     })
 
+                    this.submitted = true
+                    this.error = false
+                    this.message = 'Успешно'
+
                     // console.log(this.tg.sendData(data))
                     // console.log(tg)
                 } catch (e){
