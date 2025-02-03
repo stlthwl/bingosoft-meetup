@@ -336,6 +336,16 @@
             };
         },
         mounted() {
+
+            document.addEventListener('DOMContentLoaded', () => {
+                if (window.Telegram && window.Telegram.WebApp) {
+                    console.log('Telegram Web App is available!');
+                    console.log(window.Telegram.WebApp); // покажет подробную информацию
+                } else {
+                    console.error('Telegram Web App is NOT available.');
+                }
+            });
+
             const urlParams = new URLSearchParams(window.location.search);
             const telegramId = urlParams.get('telegram_id');
             if (telegramId) {
@@ -368,9 +378,6 @@
 
                     // window.test = window.Telegram
                     window.Telegram.WebApp.sendData(JSON.stringify(data));
-
-                    console.log(window.Telegram)
-                    console.log(window.Telegram.WebApp)
 
                     this.submitted = true
                     this.error = false
