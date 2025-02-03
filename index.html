@@ -103,76 +103,6 @@
 
 <div id="reg-form"></div>
 
-<!--&lt;!&ndash; Start: Footer &ndash;&gt;-->
-<!--<div class="container-fluid footer">-->
-<!--    <div class="row contact" id="block-registration">-->
-<!--        <div class="col-md-6 contact-form">-->
-<!--            <h3 class="content-ct"><span class="ti-email"></span> Регистрация</h3>-->
-<!--            <form class="form-horizontal" data-toggle="validator" role="form">-->
-<!--                <div class="form-group">-->
-<!--                    <label for="name" class="col-sm-3 control-label">Имя<sup>*</sup></label>-->
-<!--                    <div class="col-sm-9">-->
-<!--                        <input type="text" class="form-control" id="name" placeholder="Имя" required>-->
-<!--                        <div class="help-block with-errors pull-right"></div>-->
-<!--                        <span class="form-control-feedback" aria-hidden="true"></span>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="form-group">-->
-<!--                    <label for="surname" class="col-sm-3 control-label">Фамилия<sup>*</sup></label>-->
-<!--                    <div class="col-sm-9">-->
-<!--                        <input type="text" class="form-control" id="surname" placeholder="Фамилия" required>-->
-<!--                        <div class="help-block with-errors pull-right"></div>-->
-<!--                        <span class="form-control-feedback" aria-hidden="true"></span>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="form-group">-->
-<!--                    <label for="organization" class="col-sm-3 control-label">Организация<sup>*</sup></label>-->
-<!--                    <div class="col-sm-9">-->
-<!--                        <input type="text" class="form-control" id="organization" placeholder="Организация" required>-->
-<!--                        <div class="help-block with-errors pull-right"></div>-->
-<!--                        <span class="form-control-feedback" aria-hidden="true"></span>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="form-group">-->
-<!--                    <label for="position" class="col-sm-3 control-label">Должность<sup>*</sup></label>-->
-<!--                    <div class="col-sm-9">-->
-<!--                        <input type="text" class="form-control" id="position" placeholder="Должность" required>-->
-<!--                        <div class="help-block with-errors pull-right"></div>-->
-<!--                        <span class="form-control-feedback" aria-hidden="true"></span>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="form-group">-->
-<!--                    <label for="telegram_id" class="col-sm-3 control-label">telegram_id</label>-->
-<!--                    <div class="col-sm-9">-->
-<!--                        <input type="text" class="form-control" id="telegram_id" placeholder="telegram_id">-->
-<!--                        <div class="help-block with-errors pull-right"></div>-->
-<!--                        <span class="form-control-feedback" aria-hidden="true"></span>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="form-group">-->
-<!--                    <div class="col-sm-offset-3 col-sm-9">-->
-<!--                        <button type="submit" id="submit" name="submit" class="btn btn-yellow pull-right" style="color: #ffffff;">-->
-<!--                            Отправить-->
-<!--                            <span class="ti-arrow-right"></span>-->
-<!--                        </button>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </form>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <div class="row footer-credit">-->
-<!--        <div class="col-md-6 col-sm-6">-->
-<!--            <p><a target="_blank" href="https://bingosoft.ru">БИНГО-СОФТ</a> | 2025 </p>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-<!--&lt;!&ndash; End: Footer &ndash;&gt;-->
-
-
-
-
-
-
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.easing.min.js"></script>
@@ -402,6 +332,7 @@
                 submitted: false,
                 error: false,
                 message: '',
+                tg: window.Telegram.WebApp
             };
         },
         mounted() {
@@ -427,30 +358,15 @@
                 }
 
                 try{
-                    const response = await fetch('https://95.163.222.56:8864/registration', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            name: this.formData.name,
-                            surname: this.formData.surname,
-                            organization: this.formData.organization,
-                            position: this.formData.position,
-                            telegram_id: this.formData.telegram_id === '' ? 0 :  parseInt(this.formData.telegram_id)
-                        })
-                    });
+                    let data = JSON.stringify({
+                        name: this.formData.name,
+                        surname: this.formData.surname,
+                        organization: this.formData.organization,
+                        position: this.formData.position,
+                        telegram_id: this.formData.telegram_id === '' ? 0 :  parseInt(this.formData.telegram_id)
+                    })
 
-                    const data = await response.json(); // Получаем json данные
-                    if (data.status === 200) {
-                        this.submitted = true;
-                        this.error = false
-                        this.message = data.message
-                    } else {
-                        this.submitted = false;
-                        this.error = true
-                        this.message = data.message
-                    }
+                    console.log(this.tg.sendData(data))
 
                 } catch (e){
                     this.submitted = false
