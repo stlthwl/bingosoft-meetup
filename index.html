@@ -366,8 +366,8 @@
                         telegram_id: this.formData.telegram_id === '' ? 0 :  parseInt(this.formData.telegram_id)
                     })
 
-                    console.log(this.tg.sendData(data))
-
+                    // console.log(this.tg.sendData(data))
+                    console.log(tg)
                 } catch (e){
                     this.submitted = false
                     this.error = true
