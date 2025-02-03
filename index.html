@@ -291,8 +291,10 @@
                         v-if="!submitted"
                         type="button"
                         @click="handleButtonClick"
+                        @touchstart="handleButtonClick"
                         class="btn btn-yellow pull-right"
-                        style="position: absolute; color: #ffffff;">
+                        style="position: absolute; color: #ffffff;"
+                        id="submit_btn">
                       Отправить
                       <span class="ti-arrow-right"></span>
                     </button>
@@ -333,30 +335,9 @@
                 submitted: false,
                 error: false,
                 message: '',
-                // tg: window.Telegram
             };
         },
         mounted() {
-
-            document.addEventListener('DOMContentLoaded', () => {
-                if (window.Telegram && window.Telegram.WebApp) {
-                    console.log('Telegram Web App is available!');
-                    console.log(window.Telegram.WebApp); // покажет подробную информацию
-                } else {
-                    console.error('Telegram Web App is NOT available.');
-                }
-            });
-
-            document.addEventListener('DOMContentLoaded', () => {
-                if (window.Telegram && window.Telegram.WebApp) {
-                    console.log('Telegram Web App is available!');
-                    console.log(window.Telegram.WebApp);
-                } else {
-                    console.error('Telegram Web App is NOT available.');
-                    console.log('URL', window.location.href); // выведет текущий URL, для отладки
-                }
-            });
-
             const urlParams = new URLSearchParams(window.location.search);
             const telegramId = urlParams.get('telegram_id');
             if (telegramId) {
@@ -370,37 +351,54 @@
             },
             async submitForm() {
 
-                // Проверка на заполненность обязательных полей
-                if (!this.formData.name || !this.formData.surname || !this.formData.organization || !this.formData.position) {
-                    this.submitted = false
-                    this.error = true
-                    this.message = 'Пожалуйста, заполните все обязательные поля';
-                    return;
-                }
+                const btn = document.getElementById('submit_btn')
+                btn.addEventListener('click', (event) => {
+                    this.message = 'клик'
+                })
 
-                try{
-                    let data = JSON.stringify({
-                        name: this.formData.name,
-                        surname: this.formData.surname,
-                        organization: this.formData.organization,
-                        position: this.formData.position,
-                        telegram_id: this.formData.telegram_id === '' ? 0 :  parseInt(this.formData.telegram_id)
-                    })
+                btn.addEventListener('touchstart', (event) => {
+                    this.message = 'касание'
+                })
 
-                    // window.test = window.Telegram
-                    window.Telegram.WebApp.sendData(JSON.stringify(data));
-
-                    this.submitted = true
-                    this.error = false
-                    this.message = 'Успешно'
-
-                    // console.log(this.tg.sendData(data))
-                    // console.log(tg)
-                } catch (e){
-                    this.submitted = false
-                    this.error = true
-                    this.message = 'Ошибка: internal server error'
-                }
+                // // Проверка на заполненность обязательных полей
+                // if (!this.formData.name || !this.formData.surname || !this.formData.organization || !this.formData.position) {
+                //     this.submitted = false
+                //     this.error = true
+                //     this.message = 'Пожалуйста, заполните все обязательные поля';
+                //     return;
+                // }
+                //
+                // try{
+                //     document.addEventListener('DOMContentLoaded', () => {
+                //         if (window.Telegram && window.Telegram.WebApp) {
+                //             console.log('Telegram Web App is available!');
+                //             console.log(window.Telegram.WebApp)
+                //         } else {
+                //             console.error('Telegram Web App is NOT available.');
+                //             console.log('URL', window.location.href); // выведет текущий URL, для отладки
+                //             return 'Не удалось получить инициализировать Telegram Web App. Запустите бот @bingosoft_msk'
+                //         }
+                //     });
+                //
+                //     let data = JSON.stringify({
+                //         name: this.formData.name,
+                //         surname: this.formData.surname,
+                //         organization: this.formData.organization,
+                //         position: this.formData.position,
+                //         telegram_id: this.formData.telegram_id === '' ? 0 :  parseInt(this.formData.telegram_id)
+                //     })
+                //
+                //     window.Telegram.WebApp.sendData(JSON.stringify(data));
+                //
+                //     this.submitted = true
+                //     this.error = false
+                //     this.message = 'Данные успешно отправлены'
+                //
+                // } catch (e){
+                //     this.submitted = false
+                //     this.error = true
+                //     this.message = 'Ошибка: internal server error'
+                // }
             }
         }
     };
