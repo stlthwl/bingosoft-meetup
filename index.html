@@ -346,6 +346,16 @@
                 }
             });
 
+            document.addEventListener('DOMContentLoaded', () => {
+                if (window.Telegram && window.Telegram.WebApp) {
+                    console.log('Telegram Web App is available!');
+                    console.log(window.Telegram.WebApp);
+                } else {
+                    console.error('Telegram Web App is NOT available.');
+                    console.log('URL', window.location.href); // выведет текущий URL, для отладки
+                }
+            });
+
             const urlParams = new URLSearchParams(window.location.search);
             const telegramId = urlParams.get('telegram_id');
             if (telegramId) {
