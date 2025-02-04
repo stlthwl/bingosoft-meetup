@@ -357,6 +357,7 @@
                     return;
                 }
 
+                window.tg_id = this.formData.telegram_id
                 console.log('telegram_id', this.formData.telegram_id)
                 if (this.formData.telegram_id === '') {
                     this.submitted = false;
