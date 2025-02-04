@@ -361,7 +361,7 @@
                 console.log('telegram_id', this.formData.telegram_id)
                 if (this.formData.telegram_id === '') {
                     this.submitted = false;
-                    this.error = false;
+                    this.error = true;
                     this.message = 'Не удалось определить telegram_id. Запустите бот @bingosoft_msk.'
                     return;
                 }
