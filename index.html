@@ -291,7 +291,7 @@
                         v-if="!submitted"
                         type="button"
                         @click="handleButtonClick"
-                        @touchstart="handleButtonClick"
+                        @touch="handleButtonClick"
                         class="btn btn-yellow pull-right"
                         style="position: absolute; color: #ffffff;"
                         id="submit_btn">
@@ -355,6 +355,12 @@
                     this.error = true;
                     this.message = 'Пожалуйста, заполните все обязательные поля';
                     return;
+                }
+
+                if (this.formData.telegram_id === '') {
+                    this.submitted = false;
+                    this.error = false;
+                    this.message = 'Не удалось определить telegram_id. Запустите бот @bingosoft_msk.'
                 }
 
                 try {
