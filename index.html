@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +8,6 @@
     <meta name="author" content="stlthwl">
     <title>bingosoft-office msk meetup</title>
 
-    <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="css/themify-icons.css" rel="stylesheet">
@@ -17,8 +15,10 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://telegram.org/js/telegram-web-app.js?56"></script>
 </head>
+
 <body id="page-top" data-spy="scroll" data-target=".side-menu">
 
+<!-- Start: Navbar -->
 <nav class="side-menu">
     <ul>
         <li class="hidden active">
@@ -50,9 +50,11 @@
         </li>
     </ul>
 </nav>
+<!-- End: Navbar -->
+
+<!-- Start: Header -->
 <div class="container">
     <div class="container-fluid">
-        <!-- Start: Header -->
         <div class="row hero-header" id="home">
             <div class="col-md-5">
                 <h1 class="text-header">БИНГО-СОФТ</h1>
@@ -70,41 +72,19 @@
 </div>
 <!-- End: Header -->
 
+<!-- Start: Description -->
+<div class="container" id="description_block"></div>
+<!-- End: Description -->
 
-<!-- Start: About meetup -->
-<div class="container">
-    <div class="row me-row content-ct speaker" id="About_meetup">
-        <h2>О мероприятии</h2>
-        <p>Meetup - формат встречи специалистов, работающих в одной сфере, для обмена мнениями, профессиональным
-            опытом, обсуждения проблем и выработки решений</p>
-        <div class="row me-row content-ct speaker">
-            <h2 class="row-title">Что будет</h2>
-            <div class="col-md-4 col-sm-6 feature">
-                <h3>Обмен опытом</h3>
-                <p>Участники делятся знаниями, лайфхаками, методиками работы, примерами
-                    успешной реализации проектов или, напротив, трудностями, с которыми пришлось
-                    столкнуться.</p>
-            </div>
-            <div class="col-md-4 col-sm-6 feature">
-                <h3>Сплачивание команды</h3>
-                <p>Митапы часто проводят внутри одной организации для того, чтобы наладить отношения в команде,
-                    помочь новым сотрудникам в адаптации и, как следствие, увеличить эффективность.</p>
-            </div>
-            <div class="col-md-4 col-sm-6 feature">
-                <h3>Укрепление личного бренда</h3>
-                <p>Выступления на митапе — возможность для специалиста продемонстрировать профессионализм и
-                    уникальный опыт, приобретенный в процессе работы.</p>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End: About meetup -->
-</div>
-
-
+<!-- Start: Schedule -->
 <div class="container" id="schedule"></div>
+<!-- End: Schedule -->
 
+<!-- Start: Registration Form -->
 <div id="reg-form"></div>
+<!-- End: Registration Form -->
+
+
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.easing.min.js"></script>
@@ -112,6 +92,7 @@
 <script src="js/validator.js"></script>
 
 <script type="module" src="TimerApp.js"></script>
+<script type="module" src="DescriptionApp.js"></script>
 <script type="module" src="ScheduleApp.js"></script>
 <script type="module" src="RegistrationApp.js"></script>
 
