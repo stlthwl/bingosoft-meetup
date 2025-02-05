@@ -1,4 +1,4 @@
-const { createApp } = Vue;
+const {createApp} = Vue;
 
 const RegistrationForm = {
     template: `
@@ -6,6 +6,14 @@ const RegistrationForm = {
           <div class="row contact" id="block-registration">
             <div class="col-md-6 contact-form">
               <h3 class="content-ct"><span class="ti-email"></span> Регистрация</h3>
+              
+              <div v-if="submitted && !error" class="alert alert-success">
+                {{ message }}
+              </div>
+              <div v-if="!submitted && error" class="alert alert-danger">
+                {{ message }}
+              </div>
+              
               <form @submit.prevent="submitForm" class="form-horizontal" data-toggle="validator" role="form">
                 <div class="form-group" v-for="(field, index) in fields" :key="index">
                   <label :for="field.id" class="col-sm-3 control-label">{{ field.label }}<sup>*</sup></label>
@@ -23,7 +31,102 @@ const RegistrationForm = {
                     <span class="form-control-feedback" aria-hidden="true"></span>
                   </div>
                 </div>
-                <div class="form-group">
+                <div class="pull-right form-check form-switch checkbox-group">
+                  <div class="form-check">
+                    <input 
+                      class="form-check-input" 
+                      type="checkbox" 
+                      id="firstDayInPerson"
+                      v-model="formData['firstDayInPerson']"
+                    > 
+                    <label class="form-check-label" for="firstDayInPerson">Первый день, буду очно</label>
+                  </div>
+                  
+                  <div v-if="formData.firstDayInPerson" class="form-check">
+                    <input 
+                      class="form-check-input" 
+                      type="checkbox" 
+                      id="firstDayOfficeObserve"
+                      v-model="formData['firstDayOfficeObserve']"
+                    > 
+                    <label class="form-check-label" for="firstDayOfficeObserve">Хочу посмотреть офис</label>
+                  </div>
+                  
+                  <div class="form-check">
+                    <input 
+                      class="form-check-input" 
+                      type="checkbox" 
+                      id="secondDayRace"
+                      v-model="formData['secondDayRace']"
+                    > 
+                    <label class="form-check-label" for="secondDayRace">Второй день, гонка</label>
+                  </div>
+                  
+                  <div v-if="formData.secondDayRace" class="form-check">
+                      <input 
+                        class="form-check-input" 
+                        type="checkbox" 
+                        name="flexRadioDefault" 
+                        id="pilot"
+                        v-model="formData['pilot']"
+                        @change="togglePilot"
+                      >
+                      <label class="form-check-label" for="pilot">
+                        Пилот
+                      </label>
+                    </div>
+                    <div v-if="formData.secondDayRace" class="form-check">
+                      <input 
+                        class="form-check-input" 
+                        type="checkbox" 
+                        name="flexRadioDefault" 
+                        id="fan"
+                        v-model="formData['fan']" 
+                        @change="toggleFan"
+                        checked>
+                      <label class="form-check-label" for="fan">
+                        Болельщик
+                      </label>
+                    </div>
+                    
+                    <div class="form-check">
+                    <input 
+                      class="form-check-input" 
+                      type="checkbox" 
+                      id="secondDayPicnic"
+                      v-model="formData['secondDayPicnic']"
+                    > 
+                    <label class="form-check-label" for="secondDayPicnic">Второй день, пикник</label>
+                    </div>
+                    
+                    <div v-if="formData.secondDayPicnic" class="form-check">
+                      <input 
+                        class="form-check-input" 
+                        type="checkbox" 
+                        name="flexRadioDefault" 
+                        id="masterClass"
+                        v-model="formData['masterClass']"
+                      >
+                      <label class="form-check-label" for="masterClass">
+                        Пойду на мастер-класс
+                      </label>
+                    </div>
+                    <div v-if="formData.secondDayPicnic" class="form-check">
+                      <input 
+                        class="form-check-input" 
+                        type="checkbox" 
+                        name="flexRadioDefault" 
+                        id="sauna"
+                        v-model="formData['sauna']" 
+                        checked>
+                      <label class="form-check-label" for="sauna">
+                        Бронирую баню
+                      </label>
+                    </div>
+                 
+                </div>
+                
+                <div class="form-check">
                   <div class="col-sm-offset-3 col-sm-9">
                     <button
                         v-if="!submitted"
@@ -38,12 +141,6 @@ const RegistrationForm = {
                   </div>
                 </div>
               </form>
-              <div v-if="submitted && !error" class="alert alert-success">
-                {{ message }}
-              </div>
-              <div v-if="!submitted && error" class="alert alert-danger">
-                {{ message }}
-              </div>
             </div>
           </div>
           <div class="row footer-credit">
@@ -61,6 +158,14 @@ const RegistrationForm = {
                 surname: '',
                 organization: '',
                 position: '',
+                firstDayInPerson: false,
+                firstDayOfficeObserve: false,
+                secondDayRace: false,
+                pilot: false,
+                fan: false,
+                secondDayPicnic: false,
+                masterClass: false,
+                sauna: false,
             },
             fields: [
                 {id: 'telegram_id', label: 'telegram_id', placeholder: 'telegram_id', required: false},
@@ -82,6 +187,16 @@ const RegistrationForm = {
         }
     },
     methods: {
+        togglePilot() {
+            if (this.formData.pilot) {
+                this.formData.fan = false;
+            }
+        },
+        toggleFan() {
+            if (this.formData.fan) {
+                this.formData.pilot = false;
+            }
+        },
         handleButtonClick() {
             this.submitForm(); // Вызов метода отправки формы
         },
@@ -114,8 +229,18 @@ const RegistrationForm = {
                         surname: this.formData.surname,
                         organization: this.formData.organization,
                         position: this.formData.position,
-                        telegram_id: this.formData.telegram_id === '' ? 0 : parseInt(this.formData.telegram_id)
+                        telegram_id: this.formData.telegram_id === '' ? 0 : parseInt(this.formData.telegram_id),
+                        first_day_in_person: this.formData.firstDayInPerson,
+                        first_day_office_observe: this.formData.firstDayInPerson ? this.formData.firstDayOfficeObserve : false,
+                        second_day_race: this.formData.secondDayRace,
+                        pilot: this.formData.secondDayRace ? this.formData.pilot : false,
+                        fan: this.formData.secondDayRace ? this.formData.fan : false,
+                        second_day_picnic: this.formData.secondDayPicnic,
+                        master_class: this.formData.secondDayPicnic ? this.formData.masterClass : false,
+                        sauna: this.formData.secondDayPicnic ? this.formData.sauna : false
                     });
+
+                    console.log(data)
 
                     // Отправка данных в Telegram Web App
                     window.Telegram.WebApp.sendData(data);
