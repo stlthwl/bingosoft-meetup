@@ -116,30 +116,37 @@ a:hover, a:focus, a:active, a:visited {
 
 
 .hero-header {
-	/*background: linear-gradient(to bottom, #4169E1, #ffffff);*/
-	min-height: 600px;
-	padding: 5em;
-	color: black;
+    padding: 3em 1em 1em 1em;
     text-align: center;
+    max-height: 550px;
+	/*background: linear-gradient(to bottom, #4169E1, #ffffff);*/
+	/*min-height: 600px;*/
+	/*padding: 5em;*/
+	/*color: black;*/
+    /*text-align: center;*/
+}
+.header-block {
+    margin-bottom: 40px;
 }
 .hero-header h1 {
-	margin: 1em 0 0 0;
+	/*margin: 1em 0 0 0;*/
 }
 .hero-header h4 {
 	font-weight: normal;
 	opacity: 0.6;
     letter-spacing: 1px;
-    margin: 2em 0;
+    /*margin: 2em 0;*/
 }
 .hero-header .logo {
 	max-width: 180px;
 }
 .hero-header .btn {
-	margin-top: 3em;
+	margin-top: 2em;
+    margin-bottom: 2em;
 }
 .hero-header .rocket {
+    margin-top: 40px;
 	max-width: 100%;
-    margin-top: 30px;
 }
 .me-row {
 	padding: 40px 0;

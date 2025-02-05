@@ -7,9 +7,7 @@ const DescriptionApp = {
         <div class="row me-row content-ct speaker" id="About_meetup">
             <h2 class="row-title content-ct"> {{ description.title }} </h2>
             <h2 class="row-title content-ct"> {{ description.subtitle1 }} </h2>
-            <hr>
             <p> {{ description.description }} </p>
-            <hr>
             <div class="row me-row content-ct speaker">
                 <h2> {{ description.subtitle2 }} </h2>
                 <div v-for="ticket in description.tickets" class="col-md-4 col-sm-6 feature">
