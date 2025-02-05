@@ -5,7 +5,7 @@ const { createApp } = Vue;
 const DescriptionApp = {
     template: `
         <div class="row me-row content-ct speaker" id="About_meetup">
-            <h2 class="row-title content-ct"> {{ description.title }} </h2>
+<!--            <h2 class="row-title content-ct"> {{ description.title }} </h2>-->
             <h2 class="row-title content-ct"> {{ description.subtitle1 }} </h2>
             <p> {{ description.description }} </p>
             <div class="row me-row content-ct speaker">

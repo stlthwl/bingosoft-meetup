@@ -7,13 +7,6 @@ const RegistrationForm = {
             <div class="col-md-6 contact-form">
               <h3 class="content-ct"><span class="ti-email"></span> Регистрация</h3>
               
-              <div v-if="submitted && !error" class="alert alert-success">
-                {{ message }}
-              </div>
-              <div v-if="!submitted && error" class="alert alert-danger">
-                {{ message }}
-              </div>
-              
               <form @submit.prevent="submitForm" class="form-horizontal" data-toggle="validator" role="form">
                 <div class="form-group" v-for="(field, index) in fields" :key="index">
                   <label :for="field.id" class="col-sm-3 control-label">{{ field.label }}<sup>*</sup></label>
@@ -31,7 +24,31 @@ const RegistrationForm = {
                     <span class="form-control-feedback" aria-hidden="true"></span>
                   </div>
                 </div>
-                <div class="pull-right form-check form-switch checkbox-group">
+               
+                
+<!--                <div class="form-group">-->
+<!--                  <div class="btn btn-sm btn-red page-scroll">-->
+<!--                    <button-->
+<!--                        v-if="!submitted"-->
+<!--                        type="button"-->
+<!--                        @click="handleButtonClick"-->
+<!--                        @touch="handleButtonClick"-->
+<!--                        class="btn"-->
+<!--                        id="submit_btn">-->
+<!--                      Отправить-->
+<!--                      <span class="ti-arrow-right"></span>-->
+<!--                    </button>-->
+<!--                  </div>-->
+<!--                </div>-->
+                
+              </form>
+            </div>
+            
+          <div class="col-md-6 ">    
+            <h3 class="content-ct">Выберите нужное</h3>
+            
+            
+                <div class="form-group form-switch">
                   <div class="form-check">
                     <input 
                       class="form-check-input" 
@@ -126,23 +143,33 @@ const RegistrationForm = {
                  
                 </div>
                 
-                <div class="form-check">
-                  <div class="col-sm-offset-3 col-sm-9">
+              <div v-if="submitted && !error" class="form-group alert alert-success col-sm-9">
+                {{ message }}
+              </div>
+              <div v-if="!submitted && error" class="form-group alert alert-danger col-sm-9">
+                {{ message }}
+              </div>
+            
+            
+                 <div class="form-group">
+                  <div class="btn btn-sm btn-red page-scroll">
                     <button
                         v-if="!submitted"
                         type="button"
                         @click="handleButtonClick"
                         @touch="handleButtonClick"
-                        class="btn btn-yellow pull-right"
+                        class="btn"
                         id="submit_btn">
                       Отправить
                       <span class="ti-arrow-right"></span>
                     </button>
                   </div>
                 </div>
-              </form>
-            </div>
           </div>
+         
+          </div>
+         
+    
           <div class="row footer-credit">
             <div class="col-md-6 col-sm-6">
               <p><a target="_blank" href="https://bingosoft.ru">БИНГО-СОФТ</a> | 2025 </p>

@@ -17,8 +17,8 @@ createApp({
         const regBlock = ref(null);
 
         const calculateCountdown = () => {
-            const startDate = new Date('2025-02-12T09:30:00').getTime();
-            const endDate = new Date('2025-02-13T16:00:00').getTime();
+            const startDate = new Date('2025-02-12T09:00:00').getTime();
+            const endDate = new Date('2025-02-13T22:30:00').getTime();
             const now = new Date().getTime();
 
             if (now > endDate) {
