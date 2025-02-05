@@ -50,361 +50,70 @@
         </li>
     </ul>
 </nav>
-<div class="container-fluid">
-    <!-- Start: Header -->
-    <div class="row hero-header" id="home">
-        <div class="col-md-7">
-            <h1 class="text-header">БИНГО-СОФТ</h1>
-            <h2 class="text-header">MSK MEETUP 2025</h2>
-            <div class="text-header" id="timer"></div>
-            <a href="#block-registration" class="btn btn-lg btn-red page-scroll" id="reg-btn">Регистрация
-                <span class="ti-arrow-right"></span>
-            </a>
-        </div>
-        <div class="col-md-5">
-            <img src="img/bingo-logo3.png" class="rocket animated bounce">
-        </div>
-    </div>
-    <!-- End: Header -->
-
-
-    <!-- Start: About meetup -->
-    <div class="container">
-        <div class="row me-row content-ct speaker" id="About_meetup">
-            <h2>О мероприятии</h2>
-            <p>Meetup - формат встречи специалистов, работающих в одной сфере, для обмена мнениями, профессиональным
-                опытом, обсуждения проблем и выработки решений</p>
-            <div class="row me-row content-ct speaker">
-                <h2 class="row-title">Что будет</h2>
-                <div class="col-md-4 col-sm-6 feature">
-                    <h3>Обмен опытом</h3>
-                    <p>Участники делятся знаниями, лайфхаками, методиками работы, примерами
-                        успешной реализации проектов или, напротив, трудностями, с которыми пришлось
-                        столкнуться.</p>
-                </div>
-                <div class="col-md-4 col-sm-6 feature">
-                    <h3>Сплачивание команды</h3>
-                    <p>Митапы часто проводят внутри одной организации для того, чтобы наладить отношения в команде,
-                        помочь новым сотрудникам в адаптации и, как следствие, увеличить эффективность.</p>
-                </div>
-                <div class="col-md-4 col-sm-6 feature">
-                    <h3>Укрепление личного бренда</h3>
-                    <p>Выступления на митапе — возможность для специалиста продемонстрировать профессионализм и
-                        уникальный опыт, приобретенный в процессе работы.</p>
-                </div>
+<div class="container">
+    <div class="container-fluid">
+        <!-- Start: Header -->
+        <div class="row hero-header" id="home">
+            <div class="col-md-5">
+                <h1 class="text-header">БИНГО-СОФТ</h1>
+                <h2 class="text-header">MSK MEETUP 2025</h2>
+                <div class="text-header" id="timer"></div>
+                <a href="#block-registration" class="btn btn-lg btn-red page-scroll" id="reg-btn">Регистрация
+                    <span class="ti-arrow-right"></span>
+                </a>
+            </div>
+            <div class="col-md-7">
+                <img src="img/bingo-logo3.png" class="rocket animated bounce">
             </div>
         </div>
     </div>
-    <!-- End: About meetup -->
 </div>
+<!-- End: Header -->
 
+
+<!-- Start: About meetup -->
+<div class="container">
+    <div class="row me-row content-ct speaker" id="About_meetup">
+        <h2>О мероприятии</h2>
+        <p>Meetup - формат встречи специалистов, работающих в одной сфере, для обмена мнениями, профессиональным
+            опытом, обсуждения проблем и выработки решений</p>
+        <div class="row me-row content-ct speaker">
+            <h2 class="row-title">Что будет</h2>
+            <div class="col-md-4 col-sm-6 feature">
+                <h3>Обмен опытом</h3>
+                <p>Участники делятся знаниями, лайфхаками, методиками работы, примерами
+                    успешной реализации проектов или, напротив, трудностями, с которыми пришлось
+                    столкнуться.</p>
+            </div>
+            <div class="col-md-4 col-sm-6 feature">
+                <h3>Сплачивание команды</h3>
+                <p>Митапы часто проводят внутри одной организации для того, чтобы наладить отношения в команде,
+                    помочь новым сотрудникам в адаптации и, как следствие, увеличить эффективность.</p>
+            </div>
+            <div class="col-md-4 col-sm-6 feature">
+                <h3>Укрепление личного бренда</h3>
+                <p>Выступления на митапе — возможность для специалиста продемонстрировать профессионализм и
+                    уникальный опыт, приобретенный в процессе работы.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End: About meetup -->
+</div>
 
 
 <div class="container" id="schedule"></div>
 
 <div id="reg-form"></div>
-
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.easing.min.js"></script>
 <script src="js/scrolling-nav.js"></script>
 <script src="js/validator.js"></script>
 
-<script>
-    const { createApp, ref, onMounted, onUnmounted } = Vue;
-
-    createApp({
-        template: `
-          <div class="timer-container">
-          <h3 v-if="countdown">До начала мероприятия</h3>
-          <h3 v-if="countdown">{{ countdown }}</h3>
-          <h3 v-if="eventStatusMessage === 'Событие началось'">Событие началось</h3>
-          <h3 v-if="eventStatusMessage === 'Событие завершилось'">Событие завершилось</h3>
-          </div>
-        `,
-        setup() {
-            const countdown = ref('');
-            const eventStatusMessage = ref('');
-            let intervalId;
-            const regBtnRef = ref(null);
-            const regBlock = ref(null);
-
-            const calculateCountdown = () => {
-                const startDate = new Date('2025-02-12T09:30:00').getTime();
-                const endDate = new Date('2025-02-13T16:00:00').getTime();
-                const now = new Date().getTime();
-
-                if (now > endDate) {
-                    eventStatusMessage.value = 'Событие завершилось';
-                    clearInterval(intervalId);
-                    countdown.value = '';
-                    // Скрываем элемент
-                    if (regBtnRef.value && regBlock.value){
-                        regBtnRef.value.style.display = 'none';
-                        regBlock.value.style.display = 'none';
-                    }
-                    return;
-                }
-
-                if (now >= startDate && now <= endDate) {
-                    eventStatusMessage.value = 'Событие началось';
-                    clearInterval(intervalId);
-                    countdown.value = '';
-                    return;
-                }
-
-                const difference = startDate - now;
-
-                if (difference <= 0) {
-                    countdown.value = '';
-                    eventStatusMessage.value = 'Событие началось';
-                    clearInterval(intervalId);
-                    return;
-                }
-
-                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-                countdown.value = `${days} дн. ${hours} ч. ${minutes} мин. ${seconds} сек.`;
-            };
-
-            onMounted(() => {
-                calculateCountdown();
-                intervalId = setInterval(calculateCountdown, 1000);
-                regBtnRef.value = document.getElementById('reg-btn');
-                regBlock.value = document.getElementById('block-registration');
-            });
-
-            onUnmounted(() => {
-                clearInterval(intervalId);
-            });
-
-            return {countdown, eventStatusMessage, regBtnRef};
-        },
-        style: `
-        .timer-container{
-          text-align: center;
-        }
-      `,
-    }).mount("#timer");
-</script>
-
-<script type="module">
-    import schedule from './conf.js';
-    const { createApp, ref, computed } = Vue;
-
-    createApp({
-        template: `
-          <div class="schedule-container">
-          <h2 class="row-title content-ct">Программа</h2>
-          <ul class="nav nav-tabs">
-            <li v-for="(day, key) in schedule"
-                :key="key"
-                role="presentation"
-                :class="{active: activeTab === key}">
-              <a href="#" @click.prevent="activeTab = key">
-                {{ formatDate(day.date, 'full') }}
-              </a>
-            </li>
-          </ul>
-          <div class="tab-content">
-
-            <div v-for="(day, key) in schedule"
-                 :key="key"
-                 class="tab-pane"
-                 :class="{ 'fade' : activeTab !== key, 'in' : activeTab === key, 'active': activeTab === key}"
-            >
-              <h3>Место проведения: <a :href="day.link_to_location" target="_blank"> {{ day.location }} </a></h3>
-              <div class="row" >
-                <div class="col-md-6">
-                  <div v-for="(event, index) in day.schedule"
-                       :key="index"
-                       class="media">
-                    <div class="media-body">
-                      <h3 class="media-heading">{{ event.from }} - {{ event.to }}</h3>
-                      <h4>{{ event.description }}</h4>
-                      <div v-if="event.speakers.length > 0">
-                        <h4>Спикеры:</h4>
-                        <h5 v-for="name in event.speakers">{{ name }}</h5>
-                      </div>
-                    </div>
-                    <hr>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          </div>
-        `,
-        setup(){
-            const activeTab = ref('day_1');
-
-            const formatDate = (value, type) => {
-                const date = new Date(value);
-                const day = String(date.getDate()).padStart(2, '0'); // Добавляем ведущий ноль
-                const month = String(date.getMonth() + 1).padStart(2, '0'); // Добавляем ведущий ноль и корректируем месяц
-                const year = date.getFullYear();
-
-                if (type === 'day') {
-                    return day;
-                } else if (type === 'full') {
-                    return `${day}.${month}.${year}`;
-                }
-            };
-            return { schedule, activeTab, formatDate };
-        },
-    }).mount("#schedule");
-</script>
-
-
-<script type="module">
-    const { createApp } = Vue;
-
-    const RegistrationForm = {
-        template: `
-          <div class="container-fluid footer">
-          <div class="row contact" id="block-registration">
-            <div class="col-md-6 contact-form">
-              <h3 class="content-ct"><span class="ti-email"></span> Регистрация</h3>
-              <form @submit.prevent="submitForm" class="form-horizontal" data-toggle="validator" role="form">
-                <div class="form-group" v-for="(field, index) in fields" :key="index">
-                  <label :for="field.id" class="col-sm-3 control-label">{{ field.label }}<sup>*</sup></label>
-                  <div class="col-sm-9">
-                    <input
-                        type="text"
-                        class="form-control"
-                        :id="field.id"
-                        v-model="formData[field.id]"
-                        :placeholder="field.placeholder"
-                        :required="field.required"
-                        :readonly="field.id === 'telegram_id'"
-                    />
-                    <div class="help-block with-errors pull-right"></div>
-                    <span class="form-control-feedback" aria-hidden="true"></span>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-sm-offset-3 col-sm-9">
-                    <button
-                        v-if="!submitted"
-                        type="button"
-                        @click="handleButtonClick"
-                        @touch="handleButtonClick"
-                        class="btn btn-yellow pull-right"
-                        style="position: absolute; color: #ffffff;"
-                        id="submit_btn">
-                      Отправить
-                      <span class="ti-arrow-right"></span>
-                    </button>
-                  </div>
-                </div>
-              </form>
-              <div v-if="submitted && !error" class="alert alert-success" style="margin-top: 70px;">
-                {{ message }}
-              </div>
-              <div v-if="!submitted && error" class="alert alert-danger" style="margin-top: 70px;">
-                {{ message }}
-              </div>
-            </div>
-          </div>
-          <div class="row footer-credit">
-            <div class="col-md-6 col-sm-6">
-              <p><a target="_blank" href="https://bingosoft.ru">БИНГО-СОФТ</a> | 2025 </p>
-            </div>
-          </div>
-          </div>
-        `,
-        data() {
-            return {
-                formData: {
-                    telegram_id: '',
-                    name: '',
-                    surname: '',
-                    organization: '',
-                    position: '',
-                },
-                fields: [
-                    { id: 'telegram_id', label: 'telegram_id', placeholder: 'telegram_id', required: false },
-                    { id: 'name', label: 'Имя', placeholder: 'Имя', required: true },
-                    { id: 'surname', label: 'Фамилия', placeholder: 'Фамилия', required: true },
-                    { id: 'organization', label: 'Организация', placeholder: 'Организация', required: true },
-                    { id: 'position', label: 'Должность', placeholder: 'Должность', required: true },
-                ],
-                submitted: false,
-                error: false,
-                message: '',
-            };
-        },
-        mounted() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const telegramId = urlParams.get('telegram_id');
-            if (telegramId) {
-                this.formData.telegram_id = telegramId;
-            }
-        },
-        methods: {
-            handleButtonClick() {
-                this.submitForm(); // Вызов метода отправки формы
-            },
-            async submitForm() {
-                // Проверка на заполненность обязательных полей
-                if (!this.formData.name || !this.formData.surname || !this.formData.organization || !this.formData.position) {
-                    this.submitted = false;
-                    this.error = true;
-                    this.message = 'Пожалуйста, заполните все обязательные поля';
-                    return;
-                }
-
-                window.tg_id = this.formData.telegram_id
-                console.log('telegram_id', this.formData.telegram_id)
-                if (this.formData.telegram_id === '') {
-                    this.submitted = false;
-                    this.error = true;
-                    this.message = 'Не удалось определить telegram_id. Запустите бот @bingosoft_msk.'
-                    return;
-                }
-
-                try {
-                    // Проверка доступности Telegram Web App
-                    if (window.Telegram && window.Telegram.WebApp) {
-                        console.log('Telegram Web App is available!');
-                        console.log(window.Telegram.WebApp);
-
-                        let data = JSON.stringify({
-                            name: this.formData.name,
-                            surname: this.formData.surname,
-                            organization: this.formData.organization,
-                            position: this.formData.position,
-                            telegram_id: this.formData.telegram_id === '' ? 0 : parseInt(this.formData.telegram_id)
-                        });
-
-                        // Отправка данных в Telegram Web App
-                        window.Telegram.WebApp.sendData(data);
-
-                        this.submitted = true;
-                        this.error = false;
-                        this.message = 'Данные успешно отправлены';
-                    } else {
-                        console.error('Telegram Web App is NOT available.');
-                        console.log('URL', window.location.href); // вывод текущего URL для отладки
-                        this.message = 'Не удалось инициализировать Telegram Web App. Запустите бот @bingosoft_msk';
-                        this.error = true;
-                        this.submitted = false;
-                    }
-                } catch (e) {
-                    this.submitted = false;
-                    this.error = true;
-                    this.message = 'Ошибка: внутренний серверный сбой';
-                }
-            }
-        }
-    };
-
-    createApp(RegistrationForm).mount('#reg-form');
-</script>
-
+<script type="module" src="TimerApp.js"></script>
+<script type="module" src="ScheduleApp.js"></script>
+<script type="module" src="RegistrationApp.js"></script>
 
 </body>
 </html>
