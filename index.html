@@ -8,6 +8,8 @@
     <meta name="author" content="stlthwl">
     <title>bingosoft-office msk meetup</title>
 
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="css/themify-icons.css" rel="stylesheet">
@@ -33,6 +35,12 @@
         <li>
             <a href="#About_meetup" class="page-scroll">
                 <span class="menu-title">О мероприятии</span>
+                <span class="dot"></span>
+            </a>
+        </li>
+        <li>
+            <a href="#gallery" class="page-scroll">
+                <span class="menu-title">Галерея</span>
                 <span class="dot"></span>
             </a>
         </li>
@@ -76,6 +84,10 @@
 <div class="container" id="description_block"></div>
 <!-- End: Description -->
 
+<!-- Start: Gallery -->
+<div id="gallery"></div>
+<!-- End: Gallery -->
+
 <!-- Start: Schedule -->
 <div class="container" id="schedule"></div>
 <!-- End: Schedule -->
@@ -85,6 +97,8 @@
 <!-- End: Registration Form -->
 
 
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.easing.min.js"></script>
@@ -93,6 +107,7 @@
 
 <script type="module" src="TimerApp.js"></script>
 <script type="module" src="DescriptionApp.js"></script>
+<script type="module" src="GalleryApp.js"></script>
 <script type="module" src="ScheduleApp.js"></script>
 <script type="module" src="RegistrationApp.js"></script>
 
