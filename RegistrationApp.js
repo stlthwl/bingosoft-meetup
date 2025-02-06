@@ -55,6 +55,7 @@ const RegistrationForm = {
                       type="checkbox" 
                       id="firstDayInPerson"
                       v-model="formData['firstDayInPerson']"
+                      @change="toggleInPerson"
                     > 
                     <label class="form-check-label" for="firstDayInPerson">Первый день, буду очно</label>
                   </div>
@@ -68,6 +69,18 @@ const RegistrationForm = {
                     > 
                     <label class="form-check-label" for="firstDayOfficeObserve">Хочу посмотреть офис</label>
                   </div>
+                  
+                  <div class="form-check">
+                    <input 
+                      class="form-check-input" 
+                      type="checkbox" 
+                      id="firstDayRemote"
+                      v-model="formData['firstDayRemote']"
+                      @change="toggleRemote"
+                    checked> 
+                    <label class="form-check-label" for="firstDayRemote">Первый день, буду удаленно</label>
+                  </div>
+                 
                   
                   <div class="form-check">
                     <input 
@@ -142,13 +155,7 @@ const RegistrationForm = {
                     </div>
                  
                 </div>
-                
-              <div v-if="submitted && !error" class="form-group alert alert-success col-sm-9">
-                {{ message }}
-              </div>
-              <div v-if="!submitted && error" class="form-group alert alert-danger col-sm-9">
-                {{ message }}
-              </div>
+               
             
             
                  <div class="form-group">
@@ -165,6 +172,13 @@ const RegistrationForm = {
                     </button>
                   </div>
                 </div>
+                
+              <div v-if="submitted && !error" class="form-group alert alert-success col-sm-9">
+                {{ message }}
+              </div>
+              <div v-if="!submitted && error" class="form-group alert alert-danger col-sm-9">
+                {{ message }}
+              </div>
           </div>
          
           </div>
@@ -186,6 +200,7 @@ const RegistrationForm = {
                 organization: '',
                 position: '',
                 firstDayInPerson: false,
+                firstDayRemote: false,
                 firstDayOfficeObserve: false,
                 secondDayRace: false,
                 pilot: false,
@@ -214,6 +229,16 @@ const RegistrationForm = {
         }
     },
     methods: {
+        toggleInPerson() {
+            if (this.formData.firstDayInPerson) {
+                this.formData.firstDayRemote = false;
+            }
+        },
+        toggleRemote() {
+            if (this.formData.firstDayRemote) {
+                this.formData.firstDayInPerson = false;
+            }
+        },
         togglePilot() {
             if (this.formData.pilot) {
                 this.formData.fan = false;
@@ -258,6 +283,7 @@ const RegistrationForm = {
                         position: this.formData.position,
                         telegram_id: this.formData.telegram_id === '' ? 0 : parseInt(this.formData.telegram_id),
                         first_day_in_person: this.formData.firstDayInPerson,
+                        first_day_remote: this.formData.firstDayRemote,
                         first_day_office_observe: this.formData.firstDayInPerson ? this.formData.firstDayOfficeObserve : false,
                         second_day_race: this.formData.secondDayRace,
                         pilot: this.formData.secondDayRace ? this.formData.pilot : false,
